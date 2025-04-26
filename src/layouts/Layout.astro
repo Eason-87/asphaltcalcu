@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href="https://asphalt-calculator.com" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Primary Meta Tags -->
+		<title>{Astro.props.title || "Asphalt Calculator - Free Professional Tool for US Construction Projects"}</title>
+		<meta name="title" content={Astro.props.title || "Asphalt Calculator - Free Professional Tool for US Construction Projects"} />
+		<meta name="description" content={Astro.props.description || "Free professional-grade asphalt calculator for US construction projects. Calculate asphalt needs by area, depth, and density for precise material estimates."} />
+		<meta name="keywords" content="asphalt calculator, pavement calculator, asphalt estimator, asphalt tonnage, asphalt coverage, construction calculator, road paving calculator" />
+		<meta name="author" content="AsphaltCalc Pro" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://asphalt-calculator.com" />
+		<meta property="og:title" content={Astro.props.title || "Asphalt Calculator - Free Professional Tool for US Construction Projects"} />
+		<meta property="og:description" content={Astro.props.description || "Free professional-grade asphalt calculator for US construction projects. Calculate asphalt needs by area, depth, and density for precise material estimates."} />
+		<meta property="og:image" content="/og-image.jpg" />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://asphalt-calculator.com" />
+		<meta property="twitter:title" content={Astro.props.title || "Asphalt Calculator - Free Professional Tool for US Construction Projects"} />
+		<meta property="twitter:description" content={Astro.props.description || "Free professional-grade asphalt calculator for US construction projects. Calculate asphalt needs by area, depth, and density for precise material estimates."} />
+		<meta property="twitter:image" content="/og-image.jpg" />
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "WebApplication",
+				"name": "Asphalt Calculator",
+				"url": "https://asphalt-calculator.com",
+				"description": "Free professional-grade asphalt calculator for US construction projects. Calculate asphalt needs by area, depth, and density for precise material estimates.",
+				"applicationCategory": "UtilityApplication",
+				"operatingSystem": "All",
+				"offers": {
+					"@type": "Offer",
+					"price": "0",
+					"priceCurrency": "USD"
+				}
+			}
+		</script>
+		
+		<!-- Font preload -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+		
+		<!-- Favicon -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		
+		<!-- Additional meta -->
+		<meta name="theme-color" content="#1A202C">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--color-primary: #1A202C;
+		--color-primary-light: #2D3748;
+		--color-secondary: #3182CE;
+		--color-secondary-light: #4299E1;
+		--color-accent: #ECC94B;
+		--color-accent-light: #F6E05E;
+		--color-text: #1A202C;
+		--color-text-light: #4A5568;
+		--color-background: #FFFFFF;
+		--color-background-alt: #F7FAFC;
+		--color-border: #E2E8F0;
+		
+		--spacing-1: 0.25rem;
+		--spacing-2: 0.5rem;
+		--spacing-3: 0.75rem;
+		--spacing-4: 1rem;
+		--spacing-6: 1.5rem;
+		--spacing-8: 2rem;
+		--spacing-12: 3rem;
+		--spacing-16: 4rem;
+		
+		--border-radius-sm: 0.25rem;
+		--border-radius-md: 0.5rem;
+		--border-radius-lg: 0.75rem;
+		
+		--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+		--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+		
+		--transition-fast: 150ms ease-in-out;
+		--transition-normal: 300ms ease-in-out;
+	}
+	
+	html,
+	body {
+		font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		font-size: 16px;
+		line-height: 1.5;
+		color: var(--color-text);
+		background-color: var(--color-background);
+		scroll-behavior: smooth;
+	}
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0 0 var(--spacing-4) 0;
+		line-height: 1.2;
+		font-weight: 700;
+		color: var(--color-primary);
+	}
+	
+	h1 {
+		font-size: 2.5rem;
+	}
+	
+	h2 {
+		font-size: 2rem;
+	}
+	
+	h3 {
+		font-size: 1.5rem;
+	}
+	
+	p {
+		margin: 0 0 var(--spacing-4) 0;
+	}
+	
+	a {
+		color: var(--color-secondary);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+	
+	a:hover {
+		color: var(--color-secondary-light);
+		text-decoration: underline;
+	}
+	
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+	
+	button, .button {
+		padding: var(--spacing-2) var(--spacing-4);
+		background-color: var(--color-secondary);
+		color: white;
+		border: none;
+		border-radius: var(--border-radius-md);
+		font-weight: 500;
+		cursor: pointer;
+		transition: background-color var(--transition-fast), transform var(--transition-fast);
+	}
+	
+	button:hover, .button:hover {
+		background-color: var(--color-secondary-light);
+		transform: translateY(-1px);
+	}
+	
+	.container {
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 var(--spacing-4);
+	}
+	
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
+	}
+	
+	.card {
+		background-color: var(--color-background);
+		border-radius: var(--border-radius-md);
+		box-shadow: var(--shadow-md);
+		padding: var(--spacing-6);
+		margin-bottom: var(--spacing-6);
+	}
+	
+	/* Form styles */
+	input, select, textarea {
+		width: 100%;
+		padding: var(--spacing-2) var(--spacing-3);
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius-sm);
+		background-color: var(--color-background);
+		font-family: inherit;
+		font-size: 1rem;
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+	}
+	
+	input:focus, select:focus, textarea:focus {
+		outline: none;
+		border-color: var(--color-secondary);
+		box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+	}
+	
+	label {
+		display: block;
+		margin-bottom: var(--spacing-2);
+		font-weight: 500;
+	}
+	
+	.form-group {
+		margin-bottom: var(--spacing-4);
+	}
+	
+	.form-row {
+		display: flex;
+		flex-wrap: wrap;
+		margin: 0 -8px;
+	}
+	
+	.form-col {
+		flex: 1;
+		padding: 0 8px;
+		min-width: 200px;
+	}
+	
+	/* Utility classes */
+	.text-center {
+		text-align: center;
+	}
+	
+	.mt-2 { margin-top: var(--spacing-2); }
+	.mt-4 { margin-top: var(--spacing-4); }
+	.mt-8 { margin-top: var(--spacing-8); }
+	.mb-2 { margin-bottom: var(--spacing-2); }
+	.mb-4 { margin-bottom: var(--spacing-4); }
+	.mb-8 { margin-bottom: var(--spacing-8); }
+	.my-8 { margin-top: var(--spacing-8); margin-bottom: var(--spacing-8); }
+	
+	/* Grid */
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		gap: var(--spacing-6);
+	}
+	
+	.col-span-12 { grid-column: span 12; }
+	.col-span-6 { grid-column: span 12; }
+	.col-span-4 { grid-column: span 12; }
+	
+	@media (min-width: 768px) {
+		.col-span-6 { grid-column: span 6; }
+		.col-span-4 { grid-column: span 4; }
+	}
+	
+	/* Print styles */
+	@media print {
+		body {
+			font-size: 12pt;
+			color: #000;
+			background: #fff;
+		}
+		
+		.no-print {
+			display: none !important;
+		}
+		
+		.container {
+			max-width: 100%;
+			padding: 0;
+		}
+		
+		.card {
+			box-shadow: none;
+			border: 1px solid #ddd;
+		}
+		
+		a {
+			color: #000;
+			text-decoration: underline;
+		}
+	}
+</style>

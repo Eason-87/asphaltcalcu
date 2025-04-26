@@ -1,0 +1,132 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Calculator from '../components/Calculator.astro';
+import HowToUse from '../components/HowToUse.astro';
+import Parameters from '../components/Parameters.astro';
+import FAQ from '../components/FAQ.astro';
+import AsphaltTypes from '../components/AsphaltTypes.astro';
+import Footer from '../components/Footer.astro';
+
+// SEO metadata
+const title = "Asphalt Calculator - Free Professional Tool for US Construction Projects";
+const description = "Free professional-grade asphalt calculator for US construction projects. Calculate asphalt needs by area, depth, and density for precise material estimates.";
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Professional Asphalt Calculator</h1>
+          <p class="hero-subtitle">Calculate the precise amount of asphalt needed for your construction project</p>
+          <div class="hero-cta">
+            <a href="#calculator" class="primary-button">Start Calculating</a>
+            <a href="#how-to-use" class="secondary-button">Learn How to Use</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <Calculator />
+    <HowToUse />
+    <Parameters />
+    <AsphaltTypes />
+    <FAQ />
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .hero-section {
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--spacing-16) 0;
+    background-image: linear-gradient(135deg, rgba(26, 32, 44, 0.95) 0%, rgba(45, 55, 72, 0.95) 100%),
+                      url('https://images.pexels.com/photos/1406981/pexels-photo-1406981.jpeg?auto=compress&cs=tinysrgb&w=1600');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-4);
+    color: white;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-8);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .hero-cta {
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .primary-button {
+    display: inline-block;
+    padding: var(--spacing-3) var(--spacing-6);
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    font-weight: 700;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+  }
+  
+  .primary-button:hover {
+    background-color: var(--color-accent-light);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+  
+  .secondary-button {
+    display: inline-block;
+    padding: var(--spacing-3) var(--spacing-6);
+    background-color: transparent;
+    color: white;
+    font-weight: 700;
+    border: 2px solid white;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+  }
+  
+  .secondary-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+  
+  main {
+    overflow-x: hidden;
+  }
+  
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.25rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.125rem;
+    }
+    
+    .hero-cta {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,500 @@
+---
+---
+
+<section id="calculator" class="calculator-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2>Asphalt Calculator</h2>
+      <p>Calculate the amount of asphalt needed for your project</p>
+    </div>
+    
+    <div class="calculator-container">
+      <div class="calculator-card card">
+        <form id="asphalt-calculator-form" class="calculator-form">
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label for="shape">Area Shape</label>
+                <select id="shape" name="shape">
+                  <option value="rectangular">Rectangular</option>
+                  <option value="circular">Circular</option>
+                  <option value="custom">Custom Area</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div id="rectangular-inputs" class="shape-inputs">
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="length">Length</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="length" name="length" min="0" step="0.1" value="100">
+                    <select id="length-unit">
+                      <option value="feet">feet</option>
+                      <option value="yards">yards</option>
+                      <option value="meters">meters</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="width">Width</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="width" name="width" min="0" step="0.1" value="50">
+                    <select id="width-unit">
+                      <option value="feet">feet</option>
+                      <option value="yards">yards</option>
+                      <option value="meters">meters</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="circular-inputs" class="shape-inputs" style="display: none;">
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="diameter">Diameter</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="diameter" name="diameter" min="0" step="0.1" value="50">
+                    <select id="diameter-unit">
+                      <option value="feet">feet</option>
+                      <option value="yards">yards</option>
+                      <option value="meters">meters</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="custom-inputs" class="shape-inputs" style="display: none;">
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="area">Area</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="area" name="area" min="0" step="0.1" value="5000">
+                    <select id="area-unit">
+                      <option value="square-feet">sq ft</option>
+                      <option value="square-yards">sq yd</option>
+                      <option value="square-meters">sq m</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label for="thickness">Thickness</label>
+                <div class="input-with-unit">
+                  <input type="number" id="thickness" name="thickness" min="0" step="0.5" value="2">
+                  <select id="thickness-unit">
+                    <option value="inches">inches</option>
+                    <option value="centimeters">cm</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-col">
+              <div class="form-group">
+                <label for="density">Asphalt Density</label>
+                <div class="input-with-unit">
+                  <input type="number" id="density" name="density" min="100" step="1" value="145">
+                  <span class="unit-text">lb/ft³</span>
+                </div>
+                <div class="density-help">
+                  <button type="button" id="density-help-btn" class="help-btn" aria-label="Show density help">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="help-text">Typical hot mix asphalt: 145-150 lb/ft³</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label for="cost">Cost per Ton (Optional)</label>
+                <div class="input-with-unit">
+                  <span class="currency-symbol">$</span>
+                  <input type="number" id="cost" name="cost" min="0" step="0.01" value="85">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" id="calculate-btn" class="primary-btn">Calculate</button>
+            <button type="button" id="reset-btn" class="secondary-btn">Reset</button>
+          </div>
+        </form>
+      </div>
+      
+      <div class="results-card card" id="results-container" style="display: none;">
+        <h3>Calculation Results</h3>
+        <div class="results-grid">
+          <div class="result-item">
+            <div class="result-label">Area</div>
+            <div class="result-value" id="result-area">0 sq ft</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Volume</div>
+            <div class="result-value" id="result-volume">0 cu ft</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Weight</div>
+            <div class="result-value" id="result-weight">0 tons</div>
+          </div>
+          <div class="result-item" id="cost-result-container">
+            <div class="result-label">Estimated Cost</div>
+            <div class="result-value" id="result-cost">$0.00</div>
+          </div>
+        </div>
+        
+        <div class="result-notes">
+          <p><strong>Note:</strong> These calculations are estimates and may vary based on actual conditions. Always consult with a professional before ordering materials.</p>
+        </div>
+        
+        <div class="result-actions">
+          <button type="button" id="print-btn" class="secondary-btn">
+            <span>Print Results</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .calculator-section {
+    padding: var(--spacing-8) 0;
+  }
+  
+  .section-header {
+    margin-bottom: var(--spacing-8);
+  }
+  
+  .calculator-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .calculator-card {
+    margin-bottom: var(--spacing-6);
+  }
+  
+  .input-with-unit {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-with-unit input {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .input-with-unit select {
+    width: auto;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+    background-color: var(--color-background-alt);
+  }
+  
+  .unit-text {
+    padding: var(--spacing-2) var(--spacing-3);
+    border: 1px solid var(--color-border);
+    border-left: none;
+    background-color: var(--color-background-alt);
+    border-top-right-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+  }
+  
+  .currency-symbol {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-3);
+    border: 1px solid var(--color-border);
+    border-right: none;
+    background-color: var(--color-background-alt);
+    border-top-left-radius: var(--border-radius-sm);
+    border-bottom-left-radius: var(--border-radius-sm);
+  }
+  
+  .currency-symbol + input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .density-help {
+    display: flex;
+    align-items: center;
+    margin-top: var(--spacing-1);
+  }
+  
+  .help-btn {
+    background-color: var(--color-secondary-light);
+    color: white;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: var(--spacing-2);
+    padding: 0;
+  }
+  
+  .help-text {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-6);
+  }
+  
+  .primary-btn {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: var(--spacing-3) var(--spacing-6);
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+  }
+  
+  .primary-btn:hover {
+    background-color: var(--color-secondary-light);
+    transform: translateY(-1px);
+  }
+  
+  .secondary-btn {
+    background-color: var(--color-background-alt);
+    color: var(--color-text);
+    padding: var(--spacing-3) var(--spacing-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+  }
+  
+  .secondary-btn:hover {
+    background-color: var(--color-border);
+  }
+  
+  .results-card {
+    display: none;
+  }
+  
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+  }
+  
+  .result-item {
+    padding: var(--spacing-4);
+    background-color: var(--color-background-alt);
+    border-radius: var(--border-radius-md);
+  }
+  
+  .result-label {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-1);
+  }
+  
+  .result-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  
+  .result-notes {
+    margin-top: var(--spacing-6);
+    padding-top: var(--spacing-4);
+    border-top: 1px solid var(--color-border);
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+  }
+  
+  .result-actions {
+    margin-top: var(--spacing-4);
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  @media (max-width: 768px) {
+    .results-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+// Calculator functionality
+document.addEventListener('DOMContentLoaded', () => {
+  // Elements
+  const calculatorForm = document.getElementById('asphalt-calculator-form');
+  const shapeSelect = document.getElementById('shape');
+  const shapeInputs = document.querySelectorAll('.shape-inputs');
+  const calculateBtn = document.getElementById('calculate-btn');
+  const resetBtn = document.getElementById('reset-btn');
+  const resultsContainer = document.getElementById('results-container');
+  const resultArea = document.getElementById('result-area');
+  const resultVolume = document.getElementById('result-volume');
+  const resultWeight = document.getElementById('result-weight');
+  const resultCost = document.getElementById('result-cost');
+  const costResultContainer = document.getElementById('cost-result-container');
+  const printBtn = document.getElementById('print-btn');
+  
+  // Show/hide shape inputs based on selection
+  shapeSelect.addEventListener('change', () => {
+    const shape = shapeSelect.value;
+    
+    shapeInputs.forEach(input => {
+      input.style.display = 'none';
+    });
+    
+    document.getElementById(`${shape}-inputs`).style.display = 'block';
+  });
+  
+  // Calculate button click handler
+  calculateBtn.addEventListener('click', () => {
+    calculateAsphalt();
+  });
+  
+  // Reset button click handler
+  resetBtn.addEventListener('click', () => {
+    calculatorForm.reset();
+    resultsContainer.style.display = 'none';
+  });
+  
+  // Print button click handler
+  printBtn.addEventListener('click', () => {
+    window.print();
+  });
+  
+  // Calculation function
+  function calculateAsphalt() {
+    const shape = shapeSelect.value;
+    const thickness = parseFloat(document.getElementById('thickness').value);
+    const thicknessUnit = document.getElementById('thickness-unit').value;
+    const density = parseFloat(document.getElementById('density').value);
+    const cost = parseFloat(document.getElementById('cost').value);
+    
+    // Convert thickness to feet
+    let thicknessInFeet;
+    if (thicknessUnit === 'inches') {
+      thicknessInFeet = thickness / 12;
+    } else if (thicknessUnit === 'centimeters') {
+      thicknessInFeet = thickness / 30.48;
+    }
+    
+    let area;
+    
+    // Calculate area based on shape
+    if (shape === 'rectangular') {
+      const length = parseFloat(document.getElementById('length').value);
+      const width = parseFloat(document.getElementById('width').value);
+      const lengthUnit = document.getElementById('length-unit').value;
+      const widthUnit = document.getElementById('width-unit').value;
+      
+      // Convert length and width to feet
+      let lengthInFeet = convertToFeet(length, lengthUnit);
+      let widthInFeet = convertToFeet(width, widthUnit);
+      
+      area = lengthInFeet * widthInFeet;
+    } else if (shape === 'circular') {
+      const diameter = parseFloat(document.getElementById('diameter').value);
+      const diameterUnit = document.getElementById('diameter-unit').value;
+      
+      // Convert diameter to feet
+      let diameterInFeet = convertToFeet(diameter, diameterUnit);
+      const radius = diameterInFeet / 2;
+      
+      area = Math.PI * radius * radius;
+    } else if (shape === 'custom') {
+      const customArea = parseFloat(document.getElementById('area').value);
+      const areaUnit = document.getElementById('area-unit').value;
+      
+      // Convert custom area to square feet
+      if (areaUnit === 'square-feet') {
+        area = customArea;
+      } else if (areaUnit === 'square-yards') {
+        area = customArea * 9;
+      } else if (areaUnit === 'square-meters') {
+        area = customArea * 10.7639;
+      }
+    }
+    
+    // Calculate volume in cubic feet
+    const volume = area * thicknessInFeet;
+    
+    // Calculate weight in pounds
+    const weightInPounds = volume * density;
+    
+    // Convert weight to tons (2000 pounds per ton)
+    const weightInTons = weightInPounds / 2000;
+    
+    // Calculate cost
+    const totalCost = weightInTons * cost;
+    
+    // Format and display results
+    resultArea.textContent = `${formatNumber(area)} sq ft`;
+    resultVolume.textContent = `${formatNumber(volume)} cu ft`;
+    resultWeight.textContent = `${formatNumber(weightInTons)} tons`;
+    
+    if (!isNaN(cost) && cost > 0) {
+      resultCost.textContent = `$${formatNumber(totalCost)}`;
+      costResultContainer.style.display = 'block';
+    } else {
+      costResultContainer.style.display = 'none';
+    }
+    
+    // Show results container with animation
+    resultsContainer.style.display = 'block';
+    resultsContainer.style.opacity = '0';
+    setTimeout(() => {
+      resultsContainer.style.transition = 'opacity 0.3s ease-in-out';
+      resultsContainer.style.opacity = '1';
+    }, 10);
+  }
+  
+  // Helper function to convert units to feet
+  function convertToFeet(value, unit) {
+    if (unit === 'feet') {
+      return value;
+    } else if (unit === 'yards') {
+      return value * 3;
+    } else if (unit === 'meters') {
+      return value * 3.28084;
+    }
+    return value;
+  }
+  
+  // Helper function to format numbers
+  function formatNumber(num) {
+    return num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+});
+</script>
