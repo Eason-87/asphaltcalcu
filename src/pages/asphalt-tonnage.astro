@@ -1,0 +1,478 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Asphalt Tonnage Calculator">
+  <Header />
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Asphalt Tonnage Calculator</h1>
+        <p class="lead">Calculate the required tonnage of asphalt for your project</p>
+      </div>
+    </section>
+
+    <section class="calculator-section">
+      <div class="container">
+        <div class="calculator-container">
+          <form id="tonnage-calculator" class="calculator-form">
+            <div class="form-group">
+              <label for="length">Length (feet)</label>
+              <input type="number" id="length" name="length" required min="0" step="0.1">
+            </div>
+            <div class="form-group">
+              <label for="width">Width (feet)</label>
+              <input type="number" id="width" name="width" required min="0" step="0.1">
+            </div>
+            <div class="form-group">
+              <label for="thickness">Thickness (inches)</label>
+              <input type="number" id="thickness" name="thickness" required min="2" max="6" step="0.5">
+            </div>
+            <div class="form-group">
+              <label for="density">Density (lbs/cubic yard)</label>
+              <input type="number" id="density" name="density" value="4050" required min="0" step="1">
+              <small>Default value: 4050 lbs/cubic yard (standard asphalt density)</small>
+            </div>
+            <button type="submit" class="btn-primary">Calculate Tonnage</button>
+          </form>
+          <div class="calculator-results">
+            <h2>Results</h2>
+            <div class="result-item">
+              <span class="label">Total Area:</span>
+              <span class="value" id="total-area">0 sq ft</span>
+            </div>
+            <div class="result-item">
+              <span class="label">Total Volume:</span>
+              <span class="value" id="total-volume">0 cubic yards</span>
+            </div>
+            <div class="result-item total">
+              <span class="label">Total Tonnage:</span>
+              <span class="value" id="total-tonnage">0 tons</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <div class="container">
+        <div class="info-container">
+          <h2>Core Formula</h2>
+          <div class="formula-card">
+            <p class="formula">
+              Asphalt Tonnage (Tons) = (Volume (cubic yards) × Density (lbs/cubic yard)) ÷ 2000
+            </p>
+            <div class="key-parameters">
+              <h3>Key Parameters:</h3>
+              <ul>
+                <li><strong>Default Density</strong>: 4050 lbs/cubic yard (standard hot mix asphalt density)</li>
+                <li><strong>2000</strong>: 1 ton = 2000 pounds</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>Calculation Steps</h2>
+          <div class="steps-container">
+            <div class="step-card">
+              <h3>1. Calculate Volume (cubic yards)</h3>
+              <p class="formula">Volume = (Area (sq ft) × Thickness (inches)) ÷ 324</p>
+              <p class="note">324: Conversion factor (12 inches/foot × 27 cubic feet/cubic yard)</p>
+            </div>
+            <div class="step-card">
+              <h3>2. Calculate Tonnage</h3>
+              <p class="formula">Tonnage = (Volume × 4050) ÷ 2000</p>
+            </div>
+          </div>
+
+          <h2>Example Calculation</h2>
+          <div class="example-card">
+            <h3>Scenario</h3>
+            <p>Paving a driveway of <strong>20 feet × 30 feet</strong> with <strong>4 inches</strong> thickness.</p>
+            <div class="calculation-steps">
+              <div class="step">
+                <h4>1. Volume Calculation:</h4>
+                <p>(20 × 30 × 4) ÷ 324 = 2400 ÷ 324 ≈ 7.41 cubic yards</p>
+              </div>
+              <div class="step">
+                <h4>2. Tonnage Calculation:</h4>
+                <p>(7.41 × 4050) ÷ 2000 = 30,010 ÷ 2000 ≈ 15 tons</p>
+              </div>
+            </div>
+          </div>
+
+          <h2>Quick Reference Table (Based on 4050 lbs/cubic yard)</h2>
+          <div class="reference-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Area (sq ft)</th>
+                  <th>Thickness (inches)</th>
+                  <th>Asphalt Tonnage (Tons)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>500</td>
+                  <td>2</td>
+                  <td>≈6.25</td>
+                </tr>
+                <tr>
+                  <td>1000</td>
+                  <td>3</td>
+                  <td>≈18.75</td>
+                </tr>
+                <tr>
+                  <td>1500</td>
+                  <td>4</td>
+                  <td>≈37.5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Important Notes</h2>
+          <div class="notes-container">
+            <div class="note-card">
+              <h3>Density Adjustments</h3>
+              <ul>
+                <li>Porous Asphalt: ≈3800 lbs/cubic yard</li>
+                <li>Modified Asphalt: ≈4200 lbs/cubic yard</li>
+              </ul>
+            </div>
+            <div class="note-card">
+              <h3>Compaction Loss</h3>
+              <p>Order 5-10% extra material (volume reduces after compaction)</p>
+            </div>
+            <div class="note-card">
+              <h3>Unit Conversions</h3>
+              <ul>
+                <li>1 cubic yard = 27 cubic feet</li>
+                <li>1 ton (US) = 2000 pounds</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    padding: var(--spacing-8) 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    opacity: 0.9;
+  }
+
+  .calculator-section {
+    padding: var(--spacing-8) 0;
+  }
+
+  .calculator-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--color-background);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-6);
+  }
+
+  .calculator-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .form-group label {
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .form-group input {
+    padding: var(--spacing-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    font-size: 1rem;
+  }
+
+  .form-group small {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+  }
+
+  .btn-primary {
+    grid-column: 1 / -1;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: var(--spacing-3) var(--spacing-6);
+    border-radius: var(--border-radius-md);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+  }
+
+  .btn-primary:hover {
+    background: black;
+  }
+
+  .calculator-results {
+    background: var(--color-background-alt);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-md);
+  }
+
+  .calculator-results h2 {
+    margin-bottom: var(--spacing-4);
+    color: var(--color-text);
+  }
+
+  .result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .result-item:last-child {
+    border-bottom: none;
+  }
+
+  .result-item.total {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .calculator-form {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .info-section {
+    padding: var(--spacing-8) 0;
+    background-color: var(--color-background-alt);
+  }
+
+  .info-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .info-container h2 {
+    font-size: 1.75rem;
+    margin: var(--spacing-8) 0 var(--spacing-4);
+    color: var(--color-text);
+  }
+
+  .formula-card {
+    background: var(--color-background);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .formula {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-4);
+    text-align: center;
+  }
+
+  .key-parameters {
+    margin-top: var(--spacing-4);
+  }
+
+  .key-parameters h3 {
+    color: var(--color-text);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .key-parameters ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .key-parameters li {
+    margin-bottom: var(--spacing-2);
+    color: var(--color-text);
+  }
+
+  .steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .step-card {
+    background: var(--color-background);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .step-card h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .step-card .formula {
+    font-size: 1.1rem;
+    margin: var(--spacing-2) 0;
+  }
+
+  .step-card .note {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+  }
+
+  .example-card {
+    background: var(--color-background);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .example-card h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .calculation-steps {
+    margin-top: var(--spacing-4);
+  }
+
+  .calculation-steps .step {
+    margin-bottom: var(--spacing-3);
+  }
+
+  .calculation-steps h4 {
+    color: var(--color-text);
+    margin-bottom: var(--spacing-1);
+  }
+
+  .reference-table {
+    margin: var(--spacing-6) 0;
+    overflow-x: auto;
+  }
+
+  .reference-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-background);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+  }
+
+  .reference-table th,
+  .reference-table td {
+    padding: var(--spacing-3) var(--spacing-4);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .reference-table th {
+    background: var(--color-primary);
+    color: white;
+    font-weight: 500;
+  }
+
+  .notes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-4);
+  }
+
+  .note-card {
+    background: var(--color-background);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .note-card h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .note-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .note-card li {
+    margin-bottom: var(--spacing-2);
+    color: var(--color-text);
+  }
+
+  .note-card p {
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .steps-container,
+    .notes-container {
+      grid-template-columns: 1fr;
+    }
+
+    .formula {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('tonnage-calculator').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const length = parseFloat(document.getElementById('length').value);
+    const width = parseFloat(document.getElementById('width').value);
+    const thickness = parseFloat(document.getElementById('thickness').value);
+    const density = parseFloat(document.getElementById('density').value);
+    
+    // Calculate area in square feet
+    const area = length * width;
+    
+    // Calculate volume in cubic yards
+    const volume = (area * (thickness / 12)) / 27;
+    
+    // Calculate weight in tons
+    const weight = (volume * density) / 2000; // Convert pounds to tons
+    
+    // Update results
+    document.getElementById('total-area').textContent = `${area.toFixed(2)} sq ft`;
+    document.getElementById('total-volume').textContent = `${volume.toFixed(2)} cubic yards`;
+    document.getElementById('total-tonnage').textContent = `${weight.toFixed(2)} tons`;
+  });
+</script> 

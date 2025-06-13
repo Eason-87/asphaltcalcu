@@ -12,10 +12,16 @@
       </div>
       <nav class="main-nav">
         <ul>
-          <li><a href="#calculator">Calculator</a></li>
-          <li><a href="#how-to-use">How to Use</a></li>
-          <li><a href="#parameters">Parameters</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-trigger">More Calculator</a>
+            <ul class="dropdown-menu">
+              <li><a href="/asphalt-driveway-cost">Asphalt Driveway Cost Calculator</a></li>
+              <li><a href="/asphalt-tonnage">Asphalt Tonnage Calculator</a></li>
+            </ul>
+          </li>
+        
+        
+          <li><a href="/blog">Blog</a></li>
         </ul>
       </nav>
     </div>
@@ -102,6 +108,63 @@
     width: 100%;
   }
   
+  /* Dropdown styles */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--color-background);
+    min-width: 300px;
+    box-shadow: var(--shadow-md);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-2) 0;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-menu li {
+    margin: 0;
+    width: 100%;
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: var(--spacing-2) var(--spacing-4);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background-color var(--transition-fast);
+    white-space: nowrap;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .dropdown-menu li:last-child a {
+    border-bottom: none;
+  }
+
+  .dropdown-menu a:hover {
+    background-color: var(--color-background-alt);
+    color: var(--color-secondary);
+  }
+
+  .dropdown-menu a::after {
+    display: none;
+  }
+  
   @media (max-width: 768px) {
     .header-content {
       flex-direction: column;
@@ -112,6 +175,19 @@
       gap: var(--spacing-4);
       justify-content: center;
       flex-wrap: wrap;
+    }
+
+    .dropdown-menu {
+      position: static;
+      box-shadow: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      display: none;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
     }
   }
 </style>
