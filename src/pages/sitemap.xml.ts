@@ -12,36 +12,36 @@ export const GET: APIRoute = async ({ site }) => {
   // 基础页面
   const basePages = [
     {
-      url: "/",
+      url: "",
       lastmod: "2025-06-14",
       changefreq: "monthly",
       priority: "1.0",
     },
     {
-      url: "/asphalt-driveway-cost",
+      url: "asphalt-driveway-cost",
       lastmod: "2025-06-14",
       changefreq: "monthly",
       priority: "0.9",
     },
     {
-      url: "/asphalt-tonnage",
+      url: "asphalt-tonnage",
       lastmod: "2025-06-14",
       changefreq: "monthly",
       priority: "0.9",
     },
     {
-      url: "/blog",
+      url: "blog",
       lastmod: "2025-06-14",
-      changefreq: "monthly",
+      changefreq: "weekly",
       priority: "0.9",
     },
   ];
 
   // 生成博客文章URL
   const blogUrls = posts.map((post) => ({
-    url: `/blog/${post.slug}`,
+    url: `blog/${post.slug}`,
     lastmod: post.data.date,
-    changefreq: "monthly",
+    changefreq: "weekly",
     priority: "0.8",
   }));
 
