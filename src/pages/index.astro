@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import Calculator from '../components/Calculator.astro';
+import Cal from '../components/Cal.jsx';
 import HowToUse from '../components/HowToUse.astro';
 import Parameters from '../components/Parameters.astro';
 import FAQ from '../components/FAQ.astro';
@@ -9,8 +9,8 @@ import AsphaltTypes from '../components/AsphaltTypes.astro';
 import Footer from '../components/Footer.astro';
 
 // SEO metadata
-const title = "Asphalt Calculator - Free Professional Tool for US Construction Projects";
-const description = "Free professional-grade asphalt calculator for US construction projects. Calculate asphalt needs by area, depth, and density for precise material estimates.";
+const title = "Asphalt Calculator - Free Online Asphalt Calculator for US Projects";
+const description = "Easily calculate asphalt needs for your construction project with our free, professional asphalt calculator. Get accurate estimates and save time!";
 ---
 
 <Layout title={title} description={description}>
@@ -30,7 +30,9 @@ const description = "Free professional-grade asphalt calculator for US construct
       </div>
     </section>
     
-    <Calculator />
+    <div id="calculator">
+      <Cal client:visible />
+    </div>
     <HowToUse />
     <Parameters />
     <AsphaltTypes />
