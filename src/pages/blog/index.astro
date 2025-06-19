@@ -6,9 +6,10 @@ import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const description = "AsphaltCalc Blog - Find the latest information and insights about asphalt, paving materials.";
 ---
 
-<Layout title="Blog - Asphalt Calculator">
+<Layout title="AsphaltCalc Blog - Blogs About Asphalt" description={description} keywords="Asphalt" canonical="https://www.asphaltcalcu.com/blog">
   <Header />
   <main class="container">
     <h1 class="page-title">Blog Articles</h1>

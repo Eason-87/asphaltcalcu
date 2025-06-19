@@ -16,7 +16,7 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<Layout title={`${post.data.title} - Asphalt Calculator Blog`}>
+<Layout title={`${post.data.title}`} keywords={post.data.tag} description={post.data.subtitle} canonical={`https://www.asphaltcalcu.com/blog/${post.slug}`}>
   <Header />
   <main class="container">
     <article class="blog-post">
