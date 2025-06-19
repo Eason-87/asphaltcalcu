@@ -52,43 +52,43 @@ const AsphaltCalculator = () => {
       name: "PG 58-28 Performance Grade Asphalt",
       densityRange: [2.35, 2.45],
       density: 2.4,
-      basePrice: 85,
-      priceRange: [75, 95],
+      basePrice: 600, // 2024年美国主流市场价
+      priceRange: [550, 650], // 2024年美国主流市场价
     },
     "PG 64-22": {
       name: "PG 64-22 Performance Grade Asphalt",
       densityRange: [2.35, 2.45],
       density: 2.4,
-      basePrice: 90,
-      priceRange: [80, 100],
+      basePrice: 600, // 2024年美国主流市场价
+      priceRange: [550, 650], // 2024年美国主流市场价
     },
     "PG 76-22": {
       name: "PG 76-22 Performance Grade Asphalt",
       densityRange: [2.35, 2.45],
       density: 2.4,
-      basePrice: 95,
-      priceRange: [85, 105],
+      basePrice: 600, // 2024年美国主流市场价
+      priceRange: [550, 650], // 2024年美国主流市场价
     },
     Superpave: {
       name: "Superpave Mix Design",
       densityRange: [2.35, 2.45],
       density: 2.4,
-      basePrice: 88,
-      priceRange: [78, 98],
+      basePrice: 600, // 2024年美国主流市场价
+      priceRange: [550, 650], // 2024年美国主流市场价
     },
     "Stone Matrix": {
       name: "Stone Matrix Asphalt (SMA)",
       densityRange: [2.35, 2.45],
       density: 2.4,
-      basePrice: 100,
-      priceRange: [90, 110],
+      basePrice: 600, // 2024年美国主流市场价
+      priceRange: [550, 650], // 2024年美国主流市场价
     },
     "Open Graded": {
       name: "Open Graded Friction Course",
       densityRange: [2.2, 2.3],
       density: 2.25,
-      basePrice: 95,
-      priceRange: [85, 105],
+      basePrice: 600, // 2024年美国主流市场价
+      priceRange: [550, 650], // 2024年美国主流市场价
     },
   };
 
@@ -104,10 +104,10 @@ const AsphaltCalculator = () => {
 
   // Seasonal price factors
   const seasonFactors = {
-    spring: { name: "Spring (Mar-May)", factor: 1.0 },
-    summer: { name: "Summer (Jun-Aug)", factor: 1.15 },
-    autumn: { name: "Autumn (Sep-Nov)", factor: 1.05 },
-    winter: { name: "Winter (Dec-Feb)", factor: 0.85 },
+    spring: { name: "Spring (March-May)", factor: 1.05 },
+    summer: { name: "Summer (June-August)", factor: 1.2 },
+    fall: { name: "Fall (September-November)", factor: 1.1 },
+    winter: { name: "Winter (December-February)", factor: 0.8 },
   };
 
   const handleInputChange = (field, value) => {
@@ -668,7 +668,7 @@ const AsphaltCalculator = () => {
                 <li className="density-item">
                   • Asphalt content (binder ratio)
                 </li>
-                <li className="density-item">• Mix gradation</li>
+                <li className="density-item">• Mix design gradation</li>
                 <li className="density-item">• Compaction and air voids</li>
               </ul>
             </div>
