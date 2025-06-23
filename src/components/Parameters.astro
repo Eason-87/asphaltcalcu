@@ -3,33 +3,15 @@
 
 <section id="parameters" class="parameters-section">
   <div class="container">
-    <div class="section-header text-center">
-      <h2>Understanding Asphalt Calculation Parameters</h2>
-      <p>Learn about the key factors that influence asphalt quantity calculations</p>
-    </div>
+   
     
-    <div class="parameters-grid">
-      <div class="parameter-card card">
-        <div class="parameter-icon">
-          <img src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Asphalt area measurement" width="100" height="100">
-        </div>
-        <div class="parameter-content">
-          <h3>Area Measurements</h3>
-          <p>The area to be paved is the primary factor in determining how much asphalt you'll need. For accurate calculations:</p>
-          <ul>
-            <li>Measure all dimensions carefully, preferably multiple times</li>
-            <li>For irregular shapes, divide the area into simple geometric shapes (rectangles, triangles, circles) and calculate each separately</li>
-            <li>Include any extensions, curves, or additional features in your measurements</li>
-          </ul>
-          <p>Common units: square feet (sq ft), square yards (sq yd), or square meters (sq m)</p>
-        </div>
+    <div class="parameters-horizontal">
+      <div class="section-header">
+        <h2>Understanding Asphalt Calculation Parameters About the Asphalt Calculator</h2>
+        <p>Learn about the key factors that influence asphalt quantity calculations</p>
       </div>
-      
-      <div class="parameter-card card">
-        <div class="parameter-icon">
-          <img src="https://images.unsplash.com/photo-1584348908312-139ebcdebf1c?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Asphalt thickness demonstration" width="100" height="100">
-        </div>
-        <div class="parameter-content">
+      <div class="parameter-block">
+        <div>
           <h3>Thickness</h3>
           <p>Asphalt thickness is critical for durability and load-bearing capacity. The appropriate thickness depends on:</p>
           <ul>
@@ -69,12 +51,8 @@
           <p>Common units: inches or centimeters</p>
         </div>
       </div>
-      
-      <div class="parameter-card card">
-        <div class="parameter-icon">
-          <img src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Asphalt density demonstration" width="100" height="100">
-        </div>
-        <div class="parameter-content">
+      <div class="parameter-block">
+        <div>
           <h3>Density</h3>
           <p>Asphalt density refers to the weight of the material per unit volume. It varies based on:</p>
           <ul>
@@ -83,7 +61,56 @@
             <li>Binder content</li>
             <li>Compaction level</li>
           </ul>
-          <p>For most calculations, hot mix asphalt (HMA) has a density of approximately 145-150 pounds per cubic foot (lb/ft³) or 2,322-2,403 kilograms per cubic meter (kg/m³).</p>
+          <p>For most calculations, hot mix asphalt (HMA) has a density of approximately 145-150 pounds per cubic foot (lb/ft³) or 2.17 tons/yd³. The following are the density ranges and typical values for several common asphalt types: </p>
+          <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Asphalt Type</th>
+                <th>Density Range (lbs/ft³)</th>
+                <th>Typical Value (lbs/ft³)</th>
+                <th>Density Range (tons/yd³)</th>
+                <th>Typical Value (tons/yd³)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>HMA (Hot Mix Asphalt)</strong></td>
+                <td>140 – 155</td>
+                <td><strong>145</strong></td>
+                <td>2.10 – 2.33</td>
+                <td><strong>2.17</strong></td>
+              </tr>
+              <tr>
+                <td><strong>WMA (Warm Mix Asphalt)</strong></td>
+                <td>140 – 155</td>
+                <td><strong>144</strong></td>
+                <td>2.10 – 2.33</td>
+                <td><strong>2.16</strong></td>
+              </tr>
+              <tr>
+                <td><strong>SMA (Stone Matrix Asphalt)</strong></td>
+                <td>145 – 160</td>
+                <td><strong>150</strong></td>
+                <td>2.17 – 2.40</td>
+                <td><strong>2.25</strong></td>
+              </tr>
+              <tr>
+                <td><strong>OGFC (Open-Graded Friction Course)</strong></td>
+                <td>115 – 135</td>
+                <td><strong>125</strong></td>
+                <td>1.73 – 2.03</td>
+                <td><strong>1.87</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Cold Mix Asphalt</strong></td>
+                <td>120 – 140</td>
+                <td><strong>130</strong></td>
+                <td>1.80 – 2.10</td>
+                <td><strong>2.00</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
           <div class="density-note">
             <h4>Why density matters:</h4>
             <p>Using the correct density value ensures accurate weight calculations, which is essential for:</p>
@@ -96,12 +123,56 @@
           </div>
         </div>
       </div>
-      
-      <div class="parameter-card card">
-        <div class="parameter-icon">
-          <img src="https://images.unsplash.com/photo-1707157284454-553ef0a4ed0d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Asphalt cost calculation" width="100" height="100">
+      <div class="parameter-block">
+        <div>
+          <h3>Compaction Factor And Waste Factor</h3>
+          <p>
+            Compaction factor is a commonly used concept in engineering to represent the proportion of volume change of a material before and after compaction, it directly affects the amount of asphalt used. For example: You want to lay an asphalt pavement:
+          </p>
+          <ul>
+            <li>
+              Area: 1,000 ft ²
+            </li>
+             <li>
+              Thickness after compaction: 2 inches = 0.167 ft
+            </li>
+             <li>
+              Density unit: 2.20 tons/yd ³ (after compaction)
+            </li>
+              <li>
+              Compaction Factor = 1.12
+            </li>
+          </ul>
+          <p>
+            1. Calculate the volume after compaction (ft ³ → yd ³): V 
+(compacted)
+​
+ =1000×0.167=167ft³≈ 
+27
+167
+​
+ ≈6.19yd³<br/>
+            2. Add the compaction factor to calculate the bulk volume: V 
+(loose)
+​
+ =6.19×1.12=6.93yd³<br/>
+ 3. Calculate the required amount of asphalt (tons): Tons=6.93×2.20= 
+15.25tons
+​
+
+          </p>
+          <p>If you ignore the compaction factor, you will only use the compacted volume for calculations:</p>
+          <p class="wrong-result">
+             Tons (wrong)=6.19×2.20=13.62tons<br/>
+             The difference is 1.63 tons, approximately 12% of the total material, which can lead to procurement shortages.
+          </p>
+          <p>
+            Our asphalt calculator considers both the Compaction Factor and Waste Factor to ensure that your budget is sufficient.
+          </p>
         </div>
-        <div class="parameter-content">
+      </div>
+      <div class="parameter-block">
+        <div>
           <h3>Cost Considerations</h3>
           <p>Asphalt prices vary based on several factors:</p>
           <ul>
@@ -111,7 +182,6 @@
             <li>Mix type and quality</li>
             <li>Seasonal factors</li>
           </ul>
-          <p>As of 2025, asphalt typically costs between $85-$150 per ton in the United States, with regional variations.</p>
           <div class="cost-note">
             <h4>Additional costs to consider:</h4>
             <p>The total project expense will include more than just the asphalt material:</p>
@@ -127,189 +197,50 @@
       </div>
     </div>
     
-    <div class="conversion-section card mt-8">
-      <h3>Unit Conversion Reference</h3>
-      <div class="conversion-tables">
-        <div class="conversion-table">
-          <h4>Length Conversions</h4>
-          <table>
-            <tbody>
-              <tr>
-                <td>1 foot (ft)</td>
-                <td>=</td>
-                <td>0.3048 meters (m)</td>
-              </tr>
-              <tr>
-                <td>1 yard (yd)</td>
-                <td>=</td>
-                <td>3 feet (ft)</td>
-              </tr>
-              <tr>
-                <td>1 meter (m)</td>
-                <td>=</td>
-                <td>3.28084 feet (ft)</td>
-              </tr>
-              <tr>
-                <td>1 inch (in)</td>
-                <td>=</td>
-                <td>2.54 centimeters (cm)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <div class="conversion-table">
-          <h4>Area Conversions</h4>
-          <table>
-            <tbody>
-              <tr>
-                <td>1 square foot (sq ft)</td>
-                <td>=</td>
-                <td>0.09290304 square meters (sq m)</td>
-              </tr>
-              <tr>
-                <td>1 square yard (sq yd)</td>
-                <td>=</td>
-                <td>9 square feet (sq ft)</td>
-              </tr>
-              <tr>
-                <td>1 square meter (sq m)</td>
-                <td>=</td>
-                <td>10.7639 square feet (sq ft)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <div class="conversion-table">
-          <h4>Volume Conversions</h4>
-          <table>
-            <tbody>
-              <tr>
-                <td>1 cubic foot (cu ft)</td>
-                <td>=</td>
-                <td>0.0283168 cubic meters (cu m)</td>
-              </tr>
-              <tr>
-                <td>1 cubic yard (cu yd)</td>
-                <td>=</td>
-                <td>27 cubic feet (cu ft)</td>
-              </tr>
-              <tr>
-                <td>1 cubic meter (cu m)</td>
-                <td>=</td>
-                <td>35.3147 cubic feet (cu ft)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <div class="conversion-table">
-          <h4>Weight Conversions</h4>
-          <table>
-            <tbody>
-              <tr>
-                <td>1 ton (US, short)</td>
-                <td>=</td>
-                <td>2,000 pounds (lb)</td>
-              </tr>
-              <tr>
-                <td>1 metric ton (tonne)</td>
-                <td>=</td>
-                <td>2,204.62 pounds (lb)</td>
-              </tr>
-              <tr>
-                <td>1 pound (lb)</td>
-                <td>=</td>
-                <td>0.453592 kilograms (kg)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+  
   </div>
 </section>
 
 <style>
-  .parameters-section {
-    padding: var(--spacing-8) 0;
-  }
-  
-  .section-header {
-    margin-bottom: var(--spacing-8);
-  }
-  
-  .parameters-grid {
+  .parameters-horizontal {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-6);
-    max-width: 800px;
-    margin: 0 auto;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 3rem;
+    flex-wrap: wrap;
   }
+  .parameter-block {
+    min-width: 320px;
+    max-width: 1400px;
+    flex: 1 1 420px;
   
-  .parameter-card {
     display: flex;
-    gap: var(--spacing-6);
+    flex-direction: row;
+
+    align-items: flex-start;
   }
-  
-  .parameter-icon {
-    flex-shrink: 0;
-    width: 100px;
-  }
-  
-  .parameter-icon img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: var(--border-radius-md);
-  }
-  
-  .parameter-content {
+ 
+  .parameter-block > div {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
-  
-  .parameter-content h3 {
-    margin-bottom: var(--spacing-3);
-    color: var(--color-primary);
-  }
-  
-  .parameter-content p {
-    margin-bottom: var(--spacing-3);
-  }
-  
-  .parameter-content ul {
-    margin-bottom: var(--spacing-4);
-    padding-left: var(--spacing-6);
-  }
-  
-  .parameter-content li {
-    margin-bottom: var(--spacing-2);
-  }
-  
   .info-table {
-    margin: var(--spacing-4) 0;
+    margin: 1rem 0;
     overflow-x: auto;
   }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-  }
-  
-  th, td {
-    padding: var(--spacing-2) var(--spacing-3);
-    border: 1px solid var(--color-border);
-  }
-  
-  th {
-    background-color: var(--color-background-alt);
-    font-weight: 500;
-  }
-  
-  tr:nth-child(even) {
-    background-color: var(--color-background-alt);
+  @media (max-width: 1024px) {
+    .parameters-horizontal {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .parameter-block {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
   
   .density-note, .cost-note {
@@ -345,14 +276,12 @@
     margin-bottom: var(--spacing-3);
     font-size: 1.125rem;
   }
-  
-  @media (max-width: 768px) {
-    .parameter-card {
-      flex-direction: column;
-    }
-    
-    .parameter-icon {
-      margin-bottom: var(--spacing-4);
-    }
+
+  .wrong-result {
+    padding-left: 3rem;
+    background: #fef3c7
   }
+    
+
+
 </style>

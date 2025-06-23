@@ -24,7 +24,7 @@ const AsphaltCalculator = () => {
     length: "",
     width: "",
     thickness: "",
-    asphaltType: "PG 64-22",
+    asphaltType: "Hot Mix",
     customDensity: "",
     useCustomDensity: false,
     customPrice: "",
@@ -48,66 +48,70 @@ const AsphaltCalculator = () => {
 
   // Asphalt types configuration - includes density ranges and base prices
   const asphaltTypes = {
-    "PG 58-28": {
-      name: "PG 58-28 Performance Grade Asphalt",
-      densityRange: [2.35, 2.45],
-      density: 2.4,
-      basePrice: 600, // 2024年美国主流市场价
-      priceRange: [550, 650], // 2024年美国主流市场价
+    "Hot Mix": {
+      name: "Hot Mix Asphalt (HMA)",
+      densityRange: [2.1, 2.33],
+      density: 2.17,
+      basePrice: 600,
+      priceRange: [550, 650],
     },
-    "PG 64-22": {
-      name: "PG 64-22 Performance Grade Asphalt",
-      densityRange: [2.35, 2.45],
-      density: 2.4,
-      basePrice: 600, // 2024年美国主流市场价
-      priceRange: [550, 650], // 2024年美国主流市场价
+    "Warm Mix": {
+      name: "Warm Mix Asphalt (WMA)",
+      densityRange: [2.1, 2.33],
+      density: 2.16,
+      basePrice: 600,
+      priceRange: [550, 650],
     },
-    "PG 76-22": {
-      name: "PG 76-22 Performance Grade Asphalt",
-      densityRange: [2.35, 2.45],
-      density: 2.4,
-      basePrice: 600, // 2024年美国主流市场价
-      priceRange: [550, 650], // 2024年美国主流市场价
-    },
-    Superpave: {
-      name: "Superpave Mix Design",
-      densityRange: [2.35, 2.45],
-      density: 2.4,
-      basePrice: 600, // 2024年美国主流市场价
-      priceRange: [550, 650], // 2024年美国主流市场价
-    },
+
     "Stone Matrix": {
       name: "Stone Matrix Asphalt (SMA)",
-      densityRange: [2.35, 2.45],
-      density: 2.4,
-      basePrice: 600, // 2024年美国主流市场价
-      priceRange: [550, 650], // 2024年美国主流市场价
+      densityRange: [2.17, 2.4],
+      density: 2.25,
+      basePrice: 600,
+      priceRange: [550, 650],
     },
     "Open Graded": {
       name: "Open Graded Friction Course",
-      densityRange: [2.2, 2.3],
-      density: 2.25,
-      basePrice: 600, // 2024年美国主流市场价
-      priceRange: [550, 650], // 2024年美国主流市场价
+      densityRange: [1.73, 2.03],
+      density: 1.87,
+      basePrice: 600,
+      priceRange: [550, 650],
+    },
+    "Cold Mix": {
+      name: "Cold Mix Asphalt",
+      densityRange: [1.8, 2.1],
+      density: 2,
+      basePrice: 600,
+      priceRange: [550, 650],
     },
   };
 
-  // Regional price factors
-  const regionFactors = {
-    northeast: { name: "Northeast", factor: 1.1 },
-    southeast: { name: "Southeast", factor: 1.0 },
-    midwest: { name: "Midwest", factor: 0.95 },
-    southwest: { name: "Southwest", factor: 0.9 },
-    west: { name: "West", factor: 1.05 },
-    northwest: { name: "Northwest", factor: 1.0 },
-  };
-
-  // Seasonal price factors
-  const seasonFactors = {
-    spring: { name: "Spring (March-May)", factor: 1.05 },
-    summer: { name: "Summer (June-August)", factor: 1.2 },
-    fall: { name: "Fall (September-November)", factor: 1.1 },
-    winter: { name: "Winter (December-February)", factor: 0.8 },
+  const references = {
+    HotMix: [
+      "AASHTO T 166 (Saturated Surface Dry Determination of HMA Density)",
+      "ASTM D2726",
+      " FHWA HMA Handbook (Federal Highway Administration)",
+    ],
+    WarmMix: [
+      "AASHTO T 166/ASTM D2726 (Compaction Density Determination)",
+      "FHWA WMA Technical Guidelines",
+      "NAPA (American Asphalt Association) WMA Construction Manual",
+    ],
+    StoneMatrix: [
+      "AASHTO T 166",
+      "ASTM D2726",
+      "FHWA (Federal Highway Administration)",
+    ],
+    OpenGraded: [
+      "AASHTO T 166 / ASTM D2726",
+      "FHWA Tech Brief – Open-Graded Friction Course",
+      "NAPA IS 115 – OGFC Design Guide",
+    ],
+    ColdMix: [
+      "ASTM D4215 – Cold-Mix Patching Materials",
+      "FHWA Cold Mix Guidelines",
+      "State DOT (e.g. TxDOT, Caltrans) Cold Patch Material Manual",
+    ],
   };
 
   const handleInputChange = (field, value) => {
@@ -118,7 +122,7 @@ const AsphaltCalculator = () => {
   };
 
   const calculate = () => {
-    const {
+    let {
       length,
       width,
       thickness,
@@ -129,10 +133,6 @@ const AsphaltCalculator = () => {
       customDensity,
       useCustomDensity,
       customPrice,
-      useCustomPrice,
-      priceMode,
-      region,
-      season,
     } = inputs;
 
     if (!length || !width || !thickness) return;
@@ -146,21 +146,42 @@ const AsphaltCalculator = () => {
       // 英制转公制
       l = l * 0.3048; // 英尺转米
       w = w * 0.3048;
-      t = t * 0.0254; // 英寸转米
+      // thickness输入为inches，volume计算时应先转为feet
+      const t_feet = t / 12; // 英寸转英尺
+      // 体积先用英尺单位算
+      const area_ft = parseFloat(length) * parseFloat(width); // 英尺²
+      const volume_ft = area_ft * t_feet; // 立方英尺
+      // 体积转为立方码
+      const volume_yd = volume_ft / 27; // 1 yd³ = 27 ft³
+      var area = area_ft; // 英尺²
+      var displayVolume = volume_yd; // imperial下用于显示的体积（立方码）
     } else if (unit === "metric") {
       // 厚度从厘米转米
       t = t / 100;
+      // 基础计算
+      var area = l * w; // 平方米
+      var volume = area * t; // 立方米
+      var displayVolume = volume; // metric下用于显示的体积（立方米）
     }
 
-    // 基础计算
-    const area = l * w; // 平方米
-    const volume = area * t; // 立方米
-
     // 考虑压实系数和损耗系数
+    if (!compactionFactor) {
+      compactionFactor = 1;
+    }
     const compactionFactorNum = parseFloat(compactionFactor);
+    if (!wasteFactor) {
+      wasteFactor = 0;
+    }
     const wasteFactorNum = parseFloat(wasteFactor) / 100;
 
-    const adjustedVolume = volume * compactionFactorNum * (1 + wasteFactorNum);
+    let adjustedVolume;
+    if (unit === "imperial") {
+      adjustedVolume =
+        displayVolume * compactionFactorNum * (1 + wasteFactorNum); // yd³
+    } else {
+      adjustedVolume =
+        displayVolume * compactionFactorNum * (1 + wasteFactorNum); // m³
+    }
 
     // 沥青重量计算
     const selectedAsphalt = asphaltTypes[asphaltType];
@@ -169,23 +190,24 @@ const AsphaltCalculator = () => {
         ? parseFloat(customDensity)
         : selectedAsphalt.density;
 
-    const asphaltWeight = adjustedVolume * finalDensity * 1000; // 公斤
-    const asphaltTons = asphaltWeight / 1000; // 吨
+    let asphaltWeight, asphaltTons;
+    if (unit === "imperial") {
+      // 体积(yd³) × 密度(tons/yd³) = 重量(tons)
+      let rawTons = adjustedVolume * finalDensity;
+      asphaltTons = Math.round(rawTons * 100) / 100; // 保留两位小数
+      asphaltWeight = asphaltTons * 2000; // lbs，严格对应
+    } else {
+      // 公制保持原有逻辑
+      asphaltWeight = adjustedVolume * finalDensity * 1000; // 公斤
+      asphaltTons = asphaltWeight / 1000; // 公吨
+    }
 
     // 价格计算
     let finalPrice;
-    if (useCustomPrice && customPrice) {
+    if (customPrice) {
       finalPrice = parseFloat(customPrice);
     } else {
-      let basePrice = selectedAsphalt.basePrice;
-
-      if (priceMode === "seasonal") {
-        basePrice *= seasonFactors[season].factor;
-      } else if (priceMode === "regional") {
-        basePrice *= regionFactors[region].factor;
-      }
-
-      finalPrice = basePrice;
+      finalPrice = 0;
     }
 
     // 成本估算
@@ -196,7 +218,7 @@ const AsphaltCalculator = () => {
 
     setResults({
       area: area,
-      volume: volume,
+      volume: displayVolume,
       asphaltWeight: asphaltWeight,
       asphaltTons: asphaltTons,
       estimatedCost: estimatedCost,
@@ -213,25 +235,6 @@ const AsphaltCalculator = () => {
     return num.toLocaleString("zh-CN", {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
-    });
-  };
-
-  const resetForm = () => {
-    setInputs({
-      length: "",
-      width: "",
-      thickness: "",
-      asphaltType: "PG 64-22",
-      customDensity: "",
-      useCustomDensity: false,
-      customPrice: "",
-      useCustomPrice: false,
-      priceMode: "base",
-      region: "northeast",
-      season: "spring",
-      compactionFactor: "1.25",
-      wasteFactor: "5",
-      unit: "imperial",
     });
   };
 
@@ -252,11 +255,16 @@ const AsphaltCalculator = () => {
           inputs.unit === "metric" ? "square meter" : "square foot"
         }`,
         volume: `${formatNumber(results.volume)} ${
-          inputs.unit === "metric" ? "cubic meter" : "cubic foot"
+          inputs.unit === "metric" ? "cubic meter" : "cubic yard"
         }`,
-        weight: `${formatNumber(results.asphaltWeight)} ${
-          inputs.unit === "metric" ? "kilogram" : "pound"
-        }`,
+        weight: `${
+          inputs.unit === "metric"
+            ? formatNumber(results.asphaltWeight)
+            : results.asphaltWeight.toLocaleString("en-US", {
+                maximumFractionDigits: 0,
+              })
+        }
+          ${inputs.unit === "metric" ? " kg" : " lbs"}`,
         tons: `${formatNumber(results.asphaltTons)} ton`,
         EstimatedCost: `$${formatNumber(results.estimatedCost)}`,
       },
@@ -285,9 +293,6 @@ const AsphaltCalculator = () => {
             </h2>
           </div>
           <div className="button-group">
-            <button onClick={resetForm} className="button button-reset">
-              Reset
-            </button>
             <button onClick={exportResults} className="button button-export">
               Export Results
             </button>
@@ -324,6 +329,7 @@ const AsphaltCalculator = () => {
                   onChange={(e) => handleInputChange("length", e.target.value)}
                   placeholder="Enter length"
                   className="form-input"
+                  onWheel={(e) => e.target.blur()}
                 />
               </div>
               <div className="form-group">
@@ -336,6 +342,7 @@ const AsphaltCalculator = () => {
                   onChange={(e) => handleInputChange("width", e.target.value)}
                   placeholder="Enter width"
                   className="form-input"
+                  onWheel={(e) => e.target.blur()}
                 />
               </div>
               <div className="form-group">
@@ -351,6 +358,7 @@ const AsphaltCalculator = () => {
                   }
                   placeholder="Enter thickness"
                   className="form-input"
+                  onWheel={(e) => e.target.blur()}
                 />
               </div>
             </div>
@@ -367,6 +375,7 @@ const AsphaltCalculator = () => {
                     handleInputChange("compactionFactor", e.target.value)
                   }
                   className="form-input"
+                  onWheel={(e) => e.target.blur()}
                 />
                 <p className="form-hint">Typically 1.20-1.30</p>
               </div>
@@ -379,6 +388,7 @@ const AsphaltCalculator = () => {
                     handleInputChange("wasteFactor", e.target.value)
                   }
                   className="form-input"
+                  onWheel={(e) => e.target.blur()}
                 />
                 <p className="form-hint">Typically 3-10%</p>
               </div>
@@ -405,19 +415,38 @@ const AsphaltCalculator = () => {
                   <Info className="info-text-blue" />
                   <div className="info-text info-text-blue">
                     <p>
-                      Density Range:{" "}
+                      Typical value range:{" "}
                       {asphaltTypes[inputs.asphaltType].densityRange[0]}-
                       {asphaltTypes[inputs.asphaltType].densityRange[1]}{" "}
-                      tons/cubic yard
+                      tons/yd³
                     </p>
                     <p>
-                      Recommended Density:{" "}
-                      {asphaltTypes[inputs.asphaltType].density} tons/cubic yard
+                      Common standard value:{" "}
+                      {asphaltTypes[inputs.asphaltType].density} tons/yd³
                     </p>
-                    <p>
-                      Base Price: ${asphaltTypes[inputs.asphaltType].basePrice}{" "}
-                      per ton
-                    </p>
+                    <div>
+                      <p style={{ fontWeight: "bold", color: "#475569" }}>
+                        Density Reference Specifications and Sources:
+                      </p>
+                      <ul className="density-list">
+                        {(function () {
+                          // 动态获取references
+                          const typeKeyMap = {
+                            "Hot Mix": "HotMix",
+                            "Warm Mix": "WarmMix",
+                            "Stone Matrix": "StoneMatrix",
+                            "Open Graded": "OpenGraded",
+                            "Cold Mix": "ColdMix",
+                          };
+                          const refKey = typeKeyMap[inputs.asphaltType];
+                          return (references[refKey] || []).map((ref, idx) => (
+                            <li className="density-item" key={idx}>
+                              • {ref}
+                            </li>
+                          ));
+                        })()}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -452,124 +481,34 @@ const AsphaltCalculator = () => {
                   onChange={(e) =>
                     handleInputChange("customDensity", e.target.value)
                   }
-                  placeholder="Enter the measured density value"
+                  placeholder="Enter the measured density value (tons/yd³)"
+                  onWheel={(e) => e.target.blur()}
                 />
               )}
             </div>
 
             {/* Price Settings */}
             <div className="form-group">
-              <h3 className="section-title">Price Settings</h3>
               <div className="form-group">
-                <label className="form-label">Price Mode</label>
-                <select
-                  value={inputs.priceMode}
+                <label className="form-label">Price ($/ton)</label>
+                <input
+                  type="number"
+                  value={inputs.customPrice}
                   onChange={(e) =>
-                    handleInputChange("priceMode", e.target.value)
+                    handleInputChange("customPrice", e.target.value)
                   }
-                  className="form-select"
-                >
-                  <option value="base">Base Price</option>
-                  <option value="seasonal">Seasonal Price</option>
-                  <option value="regional">Regional Price</option>
-                </select>
+                  placeholder="Enter actual quote ($/ton)"
+                  className="form-input"
+                  onWheel={(e) => e.target.blur()}
+                />
               </div>
-
-              {inputs.priceMode === "seasonal" && (
-                <div className="form-group">
-                  <label className="form-label">Construction Season</label>
-                  <select
-                    value={inputs.season}
-                    onChange={(e) =>
-                      handleInputChange("season", e.target.value)
-                    }
-                    className="form-select"
-                  >
-                    {Object.entries(seasonFactors).map(([key, season]) => (
-                      <option key={key} value={key}>
-                        {season.name}
-                      </option>
-                    ))}
-                  </select>
-                  <p className="form-hint">
-                    Factor: {seasonFactors[inputs.season].factor}x (Higher
-                    prices during summer peak season)
-                  </p>
-                </div>
-              )}
-
-              {inputs.priceMode === "regional" && (
-                <div className="form-group">
-                  <label className="form-label">Region</label>
-                  <select
-                    value={inputs.region}
-                    onChange={(e) =>
-                      handleInputChange("region", e.target.value)
-                    }
-                    className="form-select"
-                  >
-                    {Object.entries(regionFactors).map(([key, region]) => (
-                      <option key={key} value={key}>
-                        {region.name}
-                      </option>
-                    ))}
-                  </select>
-                  <p className="form-hint">
-                    Factor: {regionFactors[inputs.region].factor}x (Based on
-                    local market conditions)
-                  </p>
-                </div>
-              )}
-
-              <div className="form-group">
-                <label
-                  className="form-label"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    checked={inputs.useCustomPrice}
-                    onChange={(e) =>
-                      handleInputChange("useCustomPrice", e.target.checked)
-                    }
-                    style={{
-                      width: "50px",
-                    }}
-                  />
-                  Use Custom Price
-                </label>
-                {inputs.useCustomPrice && (
-                  <input
-                    type="number"
-                    value={inputs.customPrice}
-                    onChange={(e) =>
-                      handleInputChange("customPrice", e.target.value)
-                    }
-                    placeholder="Enter actual quote ($/ton)"
-                    className="form-input"
-                  />
-                )}
-              </div>
-
               <div className="info-box info-box-yellow">
                 <div className="info-content">
                   <Info className="info-text-yellow" />
                   <div className="info-text info-text-yellow">
-                    <p>
-                      Base Price: ${asphaltTypes[inputs.asphaltType].basePrice}{" "}
-                      per ton
-                    </p>
-                    <p>
-                      Price Range: $
-                      {asphaltTypes[inputs.asphaltType].priceRange[0]}-
-                      {asphaltTypes[inputs.asphaltType].priceRange[1]} per ton
-                    </p>
                     <p className="form-hint">
                       * Prices may vary based on crude oil prices, supply and
-                      demand, and transportation costs
+                      demand, and transportation costs.
                     </p>
                   </div>
                 </div>
@@ -594,7 +533,7 @@ const AsphaltCalculator = () => {
                 <span className="result-label">Volume:</span>
                 <span className="result-value">
                   {formatNumber(results.volume)}{" "}
-                  {inputs.unit === "metric" ? "m³" : "ft³"}
+                  {inputs.unit === "metric" ? "m³" : "yd³"}
                 </span>
               </div>
             </div>
@@ -606,8 +545,12 @@ const AsphaltCalculator = () => {
               <div className="result-row">
                 <span className="result-label">Asphalt Weight:</span>
                 <span className="result-value">
-                  {formatNumber(results.asphaltWeight)}{" "}
-                  {inputs.unit === "metric" ? "kg" : "lbs"}
+                  {inputs.unit === "metric"
+                    ? formatNumber(results.asphaltWeight)
+                    : results.asphaltWeight.toLocaleString("en-US", {
+                        maximumFractionDigits: 0,
+                      })}
+                  {inputs.unit === "metric" ? " kg" : " lbs"}
                 </span>
               </div>
               <div className="result-row">
@@ -653,6 +596,11 @@ const AsphaltCalculator = () => {
                 <li className="suggestion-item">
                   • Consider weather conditions
                 </li>
+                <li className="suggestion-item">
+                  • Consider base requirements: This calculator only estimates
+                  the asphalt layer. Install a 4-8 inch compacted crushed stone
+                  base under asphalt pavement for structural stability.
+                </li>
               </ul>
             </div>
           </div>
@@ -672,6 +620,7 @@ const AsphaltCalculator = () => {
                 <li className="density-item">• Compaction and air voids</li>
               </ul>
             </div>
+
             <div>
               <h4>Recommendations:</h4>
               <ul className="density-list">
