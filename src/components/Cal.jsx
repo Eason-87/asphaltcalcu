@@ -286,19 +286,6 @@ const AsphaltCalculator = () => {
   return (
     <div className="calculator-container">
       <div className="calculator-card">
-        <div className="calculator-header">
-          <div>
-            <h2 className="calculator-title">
-              Professional Asphalt Calculator
-            </h2>
-          </div>
-          <div className="button-group">
-            <button onClick={exportResults} className="button button-export">
-              Export Results
-            </button>
-          </div>
-        </div>
-
         <div className="calculator-grid">
           {/* Input Parameters Section */}
           <div className="section">

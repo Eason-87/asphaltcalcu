@@ -5,15 +5,10 @@ const currentYear = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container">
     <div class="footer-content">
-      <div class="footer-logo">
-        <span class="logo-text">AsphaltCalc</span>
-        <span class="logo-badge">Pro</span>
-      </div>
-      <p class="footer-tagline">Professional Asphalt Calculator for US Construction Projects</p>
-      
+    
       <div class="footer-links">
         <div class="footer-section">
-          <h3>Calculator</h3>
+          <h3>Calculators</h3>
           <ul>
             <li><a href="/">Asphalt Calculator</a></li>
             <li><a href="/asphalt-driveway-cost">Asphalt Driveway Cost Calculator</a></li>
@@ -28,12 +23,19 @@ const currentYear = new Date().getFullYear();
             
           </ul>
         </div>
+
+         <div class="footer-section">
+          <h3>Other</h3>
+          <ul>
+            <li><a href="/terms">Terms</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+          </ul>
+        </div>
       </div>
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; {currentYear} AsphaltCalc Pro. All rights reserved.</p>
-      <p>This calculator is provided for estimation purposes only. Always consult with a professional for final calculations.</p>
+      <p>&copy; {currentYear} Asphalt Calculator. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -80,8 +82,9 @@ const currentYear = new Date().getFullYear();
   }
   
   .footer-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     gap: var(--spacing-8);
   }
   
@@ -126,6 +129,13 @@ const currentYear = new Date().getFullYear();
   @media (min-width: 768px) {
     .footer-content {
       grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-links {
+      flex-direction: column;
+      gap: var(--spacing-8);
     }
   }
 </style>

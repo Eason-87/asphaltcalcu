@@ -17,20 +17,22 @@ const description = "A professional asphalt calculator that allows you to accura
   <Header />
   
   <main>
-    <section class="hero-section">
-      <div class="container">
-        <div class="hero-content">
-          <h1>AsphaltCalc Pro - Professional Asphalt Calculator</h1>
-          <p class="hero-subtitle">Calculate Asphalt Needed for Road Construction</p>
-          <div class="hero-cta">
-            <a href="#calculator" class="primary-button">Start Calculating</a>
-            <a href="#how-to-use" class="secondary-button">Learn How to Use</a>
-          </div>
-        </div>
-      </div>
-    </section>
     
-    <div id="calculator">
+    <div style="padding-top: 20px; width: 100vw; display:flex;justify-content:center;flex-direction:column;align-items:center">
+      <div style="display:flex;height: 50px;align-items:center">
+     
+        <img src="/images/logo.png" alt="asphalt calculator" style="width: 30px;height:30px;margin-right: 20px" />
+    
+         <h1 style="font-size: 24px;margin-top: 15px">
+            Asphalt Calculator
+          </h1>
+      </div>
+      <p>
+        Use this asphalt calculator to determine the amount of asphalt you need and the budget required for your purchase.
+      </p>
+    </div>
+    
+    <div id="calculator" style="display: flex; justify-content: center;">
       <Cal client:visible />
     </div>
  
@@ -43,6 +45,19 @@ const description = "A professional asphalt calculator that allows you to accura
 </Layout>
 
 <style>
+    .calculator-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1e293b;
+    }
+
+    .header {
+      margin-top: 100px;
+      display:flex;
+      width: 100vh;
+
+    }
+
   .hero-section {
     background-color: var(--color-primary);
     color: white;

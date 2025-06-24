@@ -35,6 +35,14 @@ export const GET: APIRoute = async ({ site }) => {
       changefreq: "weekly",
       priority: "0.9",
     },
+    {
+      url: "terms",
+      lastmod: "2025-06-14",
+    },
+    {
+      url: "privacy",
+      lastmod: "2025-06-14",
+    },
   ];
 
   // 生成博客文章URL
