@@ -197,8 +197,9 @@ const AsphaltCalculator = () => {
       asphaltTons = Math.round(rawTons * 100) / 100; // 保留两位小数
       asphaltWeight = asphaltTons * 2000; // lbs，严格对应
     } else {
-      // 公制保持原有逻辑
-      asphaltWeight = adjustedVolume * finalDensity * 1000; // 公斤
+      // 公制下，需将密度从 tons/yd³ 换算为 t/m³
+      const finalDensity_t_per_m3 = (finalDensity * 0.907185) / 0.764555;
+      asphaltWeight = adjustedVolume * finalDensity_t_per_m3 * 1000; // 公斤
       asphaltTons = asphaltWeight / 1000; // 公吨
     }
 
@@ -265,7 +266,9 @@ const AsphaltCalculator = () => {
               })
         }
           ${inputs.unit === "metric" ? " kg" : " lbs"}`,
-        tons: `${formatNumber(results.asphaltTons)} ton`,
+        tons: `${formatNumber(results.asphaltTons)} ${
+          inputs.unit === "metric" ? "t (metric ton)" : "tons (short ton)"
+        }`,
         EstimatedCost: `$${formatNumber(results.estimatedCost)}`,
       },
     };
@@ -477,14 +480,14 @@ const AsphaltCalculator = () => {
             {/* Price Settings */}
             <div className="form-group">
               <div className="form-group">
-                <label className="form-label">Price ($/ton)</label>
+                <label className="form-label">Cost per Ton (USD)</label>
                 <input
                   type="number"
                   value={inputs.customPrice}
                   onChange={(e) =>
                     handleInputChange("customPrice", e.target.value)
                   }
-                  placeholder="Enter actual quote ($/ton)"
+                  placeholder="Enter cost per ton"
                   className="form-input"
                   onWheel={(e) => e.target.blur()}
                 />
@@ -543,7 +546,10 @@ const AsphaltCalculator = () => {
               <div className="result-row">
                 <span className="result-label">Asphalt Tons:</span>
                 <span className="result-value result-value-large">
-                  {formatNumber(results.asphaltTons)} tons
+                  {formatNumber(results.asphaltTons)}{" "}
+                  {inputs.unit === "metric"
+                    ? "t (metric ton)"
+                    : "tons (short ton)"}
                 </span>
               </div>
               <div className="result-row">

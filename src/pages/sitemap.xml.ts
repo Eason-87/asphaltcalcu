@@ -18,6 +18,12 @@ export const GET: APIRoute = async ({ site }) => {
       priority: "1.0",
     },
     {
+      url: "more-calculators",
+      lastmod: "2025-06-25",
+      changefreq: "monthly",
+      priority: "0.9",
+    },
+    {
       url: "asphalt-driveway-cost",
       lastmod: "2025-06-14",
       changefreq: "monthly",

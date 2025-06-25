@@ -4,20 +4,19 @@
 <header class="site-header">
   <div class="container">
     <div class="header-content-row">
-      <a href="/" class="header-logo-link" style={{
-        color:"black"
-      }}>
-        Home
-      </a>
-      <nav class="main-nav">
+      <div style="display:flex;height: 50px;align-items:center">
+         <a style="font-size: 20px;color: #fff;" href="/">
+            <img src="/images/logo.png" alt="asphalt calculator" style="width: 200px;height:35px;" />
+          </a>
+      </div>
+
+      <button class="menu-toggle" aria-controls="main-nav" aria-expanded="false">
+        <span class="sr-only">Menu</span>
+        <svg class="hamburger-icon" aria-hidden="true" focusable="false" viewBox="0 0 32 32"><path d="M4 10h24a2 2 0 0 0 0-4H4a2 2 0 0 0 0 4zm24 4H4a2 2 0 0 0 0 4h24a2 2 0 0 0 0-4zm0 8H4a2 2 0 0 0 0 4h24a2 2 0 0 0 0-4z"></path></svg>
+      </button>
+      <nav class="main-nav" id="main-nav">
         <ul>
-          <li class="dropdown">
-            <a href="#" class="dropdown-trigger">More Calculators</a>
-            <ul class="dropdown-menu">
-              <li><a href="/asphalt-driveway-cost">Asphalt Driveway Cost Calculator</a></li>
-              <li><a href="/asphalt-tonnage">Asphalt Tonnage Calculator</a></li>
-            </ul>
-          </li>
+          <li><a href="/more-calculators">More Calculators</a></li>
           <li><a href="/blog">Blog</a></li>
         </ul>
       </nav>
@@ -27,11 +26,8 @@
 
 <style>
   .site-header {
-    padding: var(--spacing-4) 0;
-    background-color: var(--color-background);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    padding: var(--spacing-3) 0;
+ 
     box-shadow: var(--shadow-sm);
   }
   
@@ -112,86 +108,108 @@
     width: 100%;
   }
   
-  /* Dropdown styles */
-  .dropdown {
-    position: relative;
-  }
-
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: var(--color-background);
-    min-width: 300px;
-    box-shadow: var(--shadow-md);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-2) 0;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .dropdown-menu li {
-    margin: 0;
-    width: 100%;
-  }
-
-  .dropdown-menu a {
-    display: block;
-    padding: var(--spacing-2) var(--spacing-4);
-    color: var(--color-text);
-    text-decoration: none;
-    transition: background-color var(--transition-fast);
-    white-space: nowrap;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .dropdown-menu li:last-child a {
-    border-bottom: none;
-  }
-
-  .dropdown-menu a:hover {
-    background-color: var(--color-background-alt);
-    color: var(--color-secondary);
-  }
-
-  .dropdown-menu a::after {
+  .menu-toggle {
     display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
   }
-  
+
+  .hamburger-icon {
+    fill: #1a202c;
+  }
+
+   .menu-toggle {
+    fill: #1a202c;
+   }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   @media (max-width: 768px) {
-    .header-content-row {
-      flex-direction: column;
-      gap: var(--spacing-4);
+    .menu-toggle {
+      display: block;
+      z-index: 101;
+    }
+
+    .main-nav {
+      display: none;
+      position: absolute;
+      top: 100%; /* Position below header */
+      left: 0;
+      right: 0;
+      background: var(--color-background);
+      box-shadow: var(--shadow-md);
+      border-bottom-left-radius: var(--border-radius-lg);
+      border-bottom-right-radius: var(--border-radius-lg);
+      padding: var(--spacing-2) 0;
     }
     
-    .main-nav ul {
-      gap: var(--spacing-4);
-      justify-content: center;
-      flex-wrap: wrap;
+    .header-content-row {
+      position: relative;
     }
-
-    .dropdown-menu {
-      position: static;
-      box-shadow: none;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      display: none;
-    }
-
-    .dropdown:hover .dropdown-menu {
+    
+    .main-nav.is-open {
       display: block;
+      background:#f4f4f4;
+    }
+
+    .main-nav ul {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .main-nav li {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .main-nav li:last-child {
+      border-bottom: none;
+    }
+
+    .main-nav a {
+      display: block;
+      padding: var(--spacing-3);
+      text-align: center;
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus {
+      background-color: var(--color-muted);
+    }
+
+    .main-nav a::after {
+      display: none;
     }
   }
 </style>
+
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mainNav = document.querySelector('#main-nav');
+
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('is-open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+
+      if (isOpen) {
+        menuToggle.setAttribute('aria-label', 'Close menu');
+      } else {
+        menuToggle.setAttribute('aria-label', 'Open menu');
+      }
+    });
+  }
+</script>

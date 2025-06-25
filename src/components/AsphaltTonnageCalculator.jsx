@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Calculator,
-  Info,
-  FileText,
-  AlertCircle,
-  LightbulbIcon,
-} from "lucide-react";
+import { Calculator, Info, FileText, AlertCircle } from "lucide-react";
 import "./AsphaltTonnageCalculator.css";
 
 const AsphaltTonnageCalculator = () => {

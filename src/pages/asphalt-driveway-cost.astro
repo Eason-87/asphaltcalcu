@@ -52,7 +52,9 @@ import Footer from '../components/Footer.astro';
             <button type="submit" class="btn-primary">Calculate Cost</button>
           </form>
           <div class="calculator-results">
-            <h2>Estimated Cost</h2>
+            <h2 style={{
+              fontSize:"20px"
+            }}>Estimated Cost</h2>
             <div class="result-item">
               <span class="label">Total Area:</span>
               <span class="value" id="total-area">0 sq ft</span>
@@ -167,18 +169,6 @@ import Footer from '../components/Footer.astro';
             <li><strong>Season</strong>: Winter construction may be more expensive (requires heated asphalt mix)</li>
             <li><strong>Design Complexity</strong>: Curved driveways and slopes increase costs</li>
           </ul>
-
-          <h2>Usage Tips</h2>
-          <div class="tips-container">
-            <div class="tip-card">
-              <h3>Compare Multiple Tools</h3>
-              <p>Different calculators may use different parameters, averaging results provides more accuracy</p>
-            </div>
-            <div class="tip-card">
-              <h3>Get Local Quotes</h3>
-              <p>Contact 3-4 local contractors for verification (online calculator provides estimates only)</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -188,14 +178,12 @@ import Footer from '../components/Footer.astro';
 
 <style>
   .hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    color: white;
     padding: var(--spacing-8) 0;
     text-align: center;
   }
 
   .hero h1 {
-    font-size: 2.5rem;
+    font-size: 1.6rem;
     margin-bottom: var(--spacing-4);
   }
 
@@ -205,7 +193,7 @@ import Footer from '../components/Footer.astro';
   }
 
   .calculator-section {
-    padding: var(--spacing-8) 0;
+    padding: var(--spacing-5) 0;
   }
 
   .calculator-container {
@@ -244,7 +232,7 @@ import Footer from '../components/Footer.astro';
 
   .btn-primary {
     grid-column: 1 / -1;
-    background: var(--color-primary);
+    background: #3257a7;
     color: white;
     border: none;
     padding: var(--spacing-3) var(--spacing-6);
@@ -256,7 +244,7 @@ import Footer from '../components/Footer.astro';
   }
 
   .btn-primary:hover {
-    background: black;
+    background: rgba(50, 87, 167, .9);
   }
 
   .calculator-results {
@@ -295,16 +283,15 @@ import Footer from '../components/Footer.astro';
 
   .info-section {
     padding: var(--spacing-8) 0;
-    background-color: var(--color-background-alt);
   }
 
   .info-container {
-    max-width: 1000px;
+    max-width: 800px;
     margin: 0 auto;
   }
 
   .info-container h2 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     margin: var(--spacing-8) 0 var(--spacing-4);
     color: var(--color-text);
   }
@@ -324,6 +311,7 @@ import Footer from '../components/Footer.astro';
   }
 
   .info-card h3 {
+     font-size: 1rem;
     color: var(--color-primary);
     margin-bottom: var(--spacing-2);
   }
@@ -348,7 +336,7 @@ import Footer from '../components/Footer.astro';
     width: 100%;
     border-collapse: collapse;
     background: var(--color-background);
-    border-radius: var(--border-radius-md);
+ 
     overflow: hidden;
   }
 
@@ -359,8 +347,7 @@ import Footer from '../components/Footer.astro';
   }
 
   th {
-    background: var(--color-primary);
-    color: white;
+    background: #f7fafc;
     font-weight: 500;
   }
 

@@ -1,6 +1,6 @@
 {
-  "name": "AsphaltCalc Pro - Professional Asphalt Calculator",
-  "short_name": "AsphaltCalc",
+  "name": "Professional Asphalt Calculator",
+  "short_name": "Asphalt Calculator",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

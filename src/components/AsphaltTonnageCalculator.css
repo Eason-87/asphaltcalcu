@@ -2,15 +2,10 @@
 
 /* General container for the calculator */
 .calculator-wrapper {
-  max-width: 72rem; /* max-w-6xl */
+  max-width: 65rem; /* max-w-6xl */
   margin-left: auto;
   margin-right: auto;
   padding: 1.5rem; /* p-6 */
-  background-image: linear-gradient(
-    to bottom right,
-    #f9fafb,
-    #eff6ff
-  ); /* bg-gradient-to-br from-gray-50 to-blue-50 */
   min-height: 100vh;
 }
 
