@@ -36,6 +36,12 @@ export const GET: APIRoute = async ({ site }) => {
       priority: "0.9",
     },
     {
+      url: "asphalt-companies",
+      lastmod: "2025-06-27",
+      changefreq: "monthly",
+      priority: "0.9",
+    },
+    {
       url: "blog",
       lastmod: "2025-06-14",
       changefreq: "weekly",

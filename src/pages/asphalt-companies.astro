@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CompanyDirectory from '../components/CompanyDirectory.jsx';
+import companies from '../assets/asphalt-companies.json';
+---
+
+<Layout  title="Asphalt companies near me" 
+  description="Find sphalt companies near me" 
+  canonical="https://www.asphaltcalcu.com/asphalt-companies">
+
+  <Header />
+  <CompanyDirectory client:load companies={companies} />
+  <Footer />
+</Layout>
