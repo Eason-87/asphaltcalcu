@@ -134,35 +134,15 @@ export default function CompanyDirectory({ companies }) {
                 }}
               />
             ) : (
-              <div
+              <img
+                src="/images/no.png"
                 style={{
                   width: "100%",
                   height: "180px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "#f5f5f5",
+                  objectFit: "cover",
                   borderRadius: "10px 10px 0 0",
-                  color: "#888",
-                  fontSize: "1.2rem",
                 }}
-              >
-                <span
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <CameraIcon />{" "}
-                  <span
-                    style={{
-                      paddingLeft: "10px",
-                    }}
-                  >
-                    No image available at this time.
-                  </span>
-                </span>
-              </div>
+              />
             )}
             <div style={{ padding: "16px", width: "100%" }}>
               <div style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
