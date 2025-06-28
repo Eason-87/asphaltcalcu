@@ -30,7 +30,7 @@ export default function CompanyDirectory({ companies }) {
           marginBottom: "1.5rem",
         }}
       >
-        Asphalt companies near me
+        Asphalt contractors
       </h1>
       <div style={{ display: "flex", gap: "16px", marginBottom: "2rem" }}>
         <div

@@ -1,0 +1,234 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AsphaltRoofCostCalculator from '../components/AsphaltRoofCostCalculator.jsx';
+---
+
+<Layout 
+  title="Asphalt Roof Cost Calculator" 
+  description="This calculator helps you quickly estimate the total cost of installing a new asphalt shingle roof on your home." 
+  canonical="https://www.asphaltcalcu.com/asphalt-roof-cost-alculator"
+>
+  <Header />
+  <main>
+    <AsphaltRoofCostCalculator client:load />
+    <section class="info-section">
+      <div class="container">
+        <div class="info-container">
+          <h2>About this asphalt shingle roof cost calculator</h2>
+          <div class="info-grid">
+            <div class="info-card" style="font-size: 1.2rem;">
+                This calculator helps you quickly estimate the total cost of installing a new asphalt shingle roof on your home.
+
+You just need to:
+
+Enter your roof size in square feet.
+
+Choose the type of shingles you want — basic 3-tab, architectural, or premium luxury shingles.
+
+Optionally, check the box if you need to remove your old roof.
+
+Once you do that, the calculator instantly shows you an estimated total cost — no guessing, no math required.
+
+It’s a simple, helpful tool whether you're:
+
+Planning your home renovation budget,
+
+Comparing roofing options,
+
+Or just curious about what a new roof might cost.
+
+You don’t need to know roofing jargon — just enter your info and get a clear estimate in seconds.
+                
+            </div>  
+          </div>
+
+          <h2>2025 US market, average cost (including materials + installation)</h2>
+          <div class="info-grid">
+            <div class="info-card" style="font-size: 1.2rem;">
+                <table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Cost per Sq Ft</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Standard 3-Tab Asphalt Shingles</td>
+      <td>$3.00 – $4.50</td>
+      <td>Most affordable, lasts about 15–20 years</td>
+    </tr>
+    <tr>
+      <td>Architectural Shingles</td>
+      <td>$4.00 – $6.50</td>
+      <td>Thicker and more durable, lasts 20–30 years</td>
+    </tr>
+    <tr>
+      <td>Luxury Asphalt Shingles</td>
+      <td>$6.00 – $9.00+</td>
+      <td>Premium style (mimics wood or slate), lasts 30–50 years</td>
+    </tr>
+  </tbody>
+</table>
+
+            </div>
+          
+          </div>
+
+          <h2>Factors that affect the total cost of asphalt shingle roofing:</h2>
+          <div class="info-grid">
+             <div class="info-card" style="font-size: 1.2rem;">
+                <ul>
+                  <li>Roof slope and complexity: steeper slopes, multi-faceted structures cost more</li>
+                  <li>Regional labor cost differences: New York, California, and other places are more expensive</li>
+                  <li>Is it necessary to remove old tiles or repair structures?</li>
+                  <li>Whether to install new exhaust pipes, skylights, rain gutters, etc</li>
+                </ul>
+             </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .info-section {
+    padding: var(--spacing-8) 0;
+  }
+
+  .info-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .info-container h2 {
+    font-size: 1.5rem;
+    margin: var(--spacing-8) 0 var(--spacing-4);
+    color: var(--color-text);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .info-card {
+    background: var(--color-background);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .info-card h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .info-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .info-card li {
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .price-table {
+    margin: var(--spacing-6) 0;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-background);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+  }
+
+  th, td {
+    padding: var(--spacing-3) var(--spacing-4);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  th {
+    background: #f3f4f6;
+    color: black;
+    font-weight: 500;
+  }
+
+  .total-row {
+    background: var(--color-background-alt);
+    font-weight: 500;
+  }
+
+  .factors-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-4) 0;
+  }
+
+  .factors-list li {
+    margin-bottom: var(--spacing-3);
+    padding-left: var(--spacing-6);
+    position: relative;
+  }
+
+  .factors-list li::before {
+    content: "•";
+    color: var(--color-primary);
+    position: absolute;
+    left: 0;
+    font-size: 1.5rem;
+  }
+
+  .tips-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-4);
+  }
+
+  .tip-card {
+    background: var(--color-background);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .tip-card h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .tip-card p {
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tips-container {
+      grid-template-columns: 1fr;
+    }
+
+    th, td {
+      padding: var(--spacing-2) var(--spacing-3);
+    }
+  }
+</style>

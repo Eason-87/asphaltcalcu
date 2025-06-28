@@ -27,13 +27,19 @@ export const GET: APIRoute = async ({ site }) => {
       url: "asphalt-driveway-cost",
       lastmod: "2025-06-14",
       changefreq: "monthly",
-      priority: "0.9",
+      priority: "0.8",
     },
     {
       url: "asphalt-tonnage",
       lastmod: "2025-06-14",
       changefreq: "monthly",
-      priority: "0.9",
+      priority: "0.8",
+    },
+    {
+      url: "asphalt-roof-cost-alculator",
+      lastmod: "2025-06-29",
+      changefreq: "monthly",
+      priority: "0.8",
     },
     {
       url: "asphalt-companies",
@@ -50,10 +56,14 @@ export const GET: APIRoute = async ({ site }) => {
     {
       url: "terms",
       lastmod: "2025-06-14",
+      changefreq: "monthly",
+      priority: "0.3",
     },
     {
       url: "privacy",
       lastmod: "2025-06-14",
+      changefreq: "monthly",
+      priority: "0.3",
     },
   ];
 

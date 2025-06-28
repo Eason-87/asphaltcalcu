@@ -1,0 +1,108 @@
+.calculator-container {
+  max-width: 36rem; /* max-w-xl */
+  margin: 0 auto; /* mx-auto */
+  margin-top: 30px;
+  padding: 1.5rem; /* p-6 */
+  background-color: white; /* bg-white */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+  border-radius: 1rem; /* rounded-2xl */
+}
+
+.calculator-title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.input-group {
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.input-label {
+  display: block; /* block */
+  font-weight: 500; /* font-medium */
+  margin-bottom: 0.25rem; /* mb-1 */
+}
+
+.input-field {
+  width: 100%; /* w-full */
+  padding: 0.5rem; /* p-2 */
+  border: 1px solid #d1d5db; /* border */
+  border-radius: 0.25rem; /* rounded */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.checkbox-group {
+  margin-bottom: 1rem; /* mb-4 */
+  display: flex; /* flex */
+  align-items: center; /* items-center */
+}
+
+.checkbox-input {
+  margin-right: 0.5rem; /* mr-2 */
+  width: 1rem;
+  height: 1rem;
+}
+
+.checkbox-label {
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.result-container {
+  margin-top: 1.5rem; /* mt-6 */
+  padding: 1rem; /* p-4 */
+  background-color: #f3f4f6; /* bg-gray-100 */
+  border-radius: 0.75rem; /* rounded-xl */
+}
+
+.result-title {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  margin: 0;
+}
+
+.result-amount {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  color: #15803d; /* text-green-700 */
+  margin-top: 0.5rem; /* mt-2 */
+  margin-bottom: 0;
+}
+
+.cost-breakdown {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d1d5db;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.breakdown-item:last-child {
+  margin-bottom: 0;
+}
+
+.breakdown-item span:first-child {
+  font-weight: 500;
+}
+
+.breakdown-item span:last-child {
+  font-weight: 600;
+  color: #374151;
+}
