@@ -292,8 +292,6 @@ const AsphaltCalculator = () => {
         <div className="calculator-grid">
           {/* Input Parameters Section */}
           <div className="section">
-            <h2 className="section-title">Input Parameters</h2>
-
             {/* Unit Selection */}
             <div className="form-group">
               <label className="form-label">Measurement Unit</label>
@@ -508,8 +506,6 @@ const AsphaltCalculator = () => {
 
           {/* Results Section */}
           <div className="section">
-            <h2 className="section-title">Calculation Results</h2>
-
             <div className="result-card result-card-blue">
               <h3 className="result-title result-title-blue">Basic Data</h3>
               <div className="result-row">
