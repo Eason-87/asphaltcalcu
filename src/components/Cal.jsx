@@ -414,29 +414,6 @@ const AsphaltCalculator = () => {
                       Common standard value:{" "}
                       {asphaltTypes[inputs.asphaltType].density} tons/yd³
                     </p>
-                    <div>
-                      <p style={{ fontWeight: "bold", color: "#475569" }}>
-                        Density Reference Specifications and Sources:
-                      </p>
-                      <ul className="density-list">
-                        {(function () {
-                          // 动态获取references
-                          const typeKeyMap = {
-                            "Hot Mix": "HotMix",
-                            "Warm Mix": "WarmMix",
-                            "Stone Matrix": "StoneMatrix",
-                            "Open Graded": "OpenGraded",
-                            "Cold Mix": "ColdMix",
-                          };
-                          const refKey = typeKeyMap[inputs.asphaltType];
-                          return (references[refKey] || []).map((ref, idx) => (
-                            <li className="density-item" key={idx}>
-                              • {ref}
-                            </li>
-                          ));
-                        })()}
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -593,39 +570,6 @@ const AsphaltCalculator = () => {
                   • Consider base requirements: This calculator only estimates
                   the asphalt layer. Install a 4-8 inch compacted crushed stone
                   base under asphalt pavement for structural stability.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="density-info">
-          <h3 className="section-title">Density Information</h3>
-          <div className="density-grid">
-            <div>
-              <h4>Density Factors:</h4>
-              <ul className="density-list">
-                <li className="density-item">• Aggregate type and source</li>
-                <li className="density-item">
-                  • Asphalt content (binder ratio)
-                </li>
-                <li className="density-item">• Mix design gradation</li>
-                <li className="density-item">• Compaction and air voids</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4>Recommendations:</h4>
-              <ul className="density-list">
-                <li className="density-item">
-                  • Use measured density when available
-                </li>
-                <li className="density-item">
-                  • Follow AASHTO T 166 for density testing
-                </li>
-                <li className="density-item">• Consider seasonal conditions</li>
-                <li className="density-item">
-                  • Regular density parameter verification
                 </li>
               </ul>
             </div>
